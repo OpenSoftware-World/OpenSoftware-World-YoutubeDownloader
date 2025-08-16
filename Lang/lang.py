@@ -1,52 +1,37 @@
 #!/usr/bin/python3
+""" Copyright© 2025 LinuxUsersLinuxMint
+LinuxUsersLinuxMint-YoutubeDownloader Tüm Hakları GPL(Genel Kamu Lisansı) altında korunmaktadır.
+LinuxUsersLinuxMint-YoutubeDownloader All Rights Reserved under the GPL(General Public License).
+Bu Yazılımın Bir Kopyası GitHub da yayınlanmaktadır Görüntülemek için: https://github.com/LinuxUsersLinuxMint/LinuxUsersLinuxMint-YoutubeDownloader
+A Copy of This Software is published on GitHub To view: https://github.com/LinuxUsersLinuxMint/LinuxUsersLinuxMint-YoutubeDownloader"""
 
-from PyAppDevKit.pyappdevkit import error_msg
+import configparser
 
-lang = str(input('Which language (English or Turkish)?: '))
+config = configparser.ConfigParser()
+config.read('Lang/lang.ini')
 
-if lang == "English" or lang == "EN" or lang == "en":
-    music_file_txt = "Music"
-    video_file_txt = "Video"
-    playlist_file_txt = "Playlist"
-    videodownload_link_input_txt = "Please Paste the Video Link you want to download: "
-    process_started_txt = "Download Process Started..."
-    process_completed_txt = "Download Completed."
-    video_file_named_downloaded_msg = "Video File Named Downloaded"
-    playlistdownload_link_input_txt = "Enter Playlist Link: "
-    playlist_downloading_msg = "Downloading Playlist Named..."
-    pl_downloading_video_msg = "Downloading Video File Named..."
-    downloaded_video_file_named_txt = "Downloaded Video File Named."
-    audiodownload_link_input_txt = "Please Paste the Audio Link you want to download: "
-    audio_downloaded_msg = "Audio File Named Downloaded."
-    video_search_input_txt = "Type the name of the Video you want to search: "
-    option_one = "1- Download Video"
-    option_two = "2- Download Music"
-    option_three = "3- Download Playlist"
-    option_four = "4- Video Search"
-    option_five = "5- Exit"
-    choose_txt = "Please Make Your Choice: "
-    exit_lang = "EN"
-elif lang == "Türkçe" or lang == "TR" or lang == "tr":
-    music_file_txt = "Müzik"
-    video_file_txt = "Video"
-    playlist_file_txt = "Çalma listesi"
-    videodownload_link_input_txt = "Lütfen indirmek istediğiniz Video Bağlantısını Yapıştırın: "
-    process_started_txt = "İndirme İşlemi Başladı..."
-    process_completed_txt = "İndirme Tamamlandı."
-    video_file_named_downloaded_msg = "Adlı video indirilmiştir."
-    playlistdownload_link_input_txt = "Oynatma Listesi Bağlantısını giriniz: "
-    playlist_downloading_msg = "Adlı Oynatma Listesi indiriliyor..."
-    pl_downloading_video_msg = "Adlı video indirilmiştir..."
-    download_video_file_named_txt = "İndirilen Video Dosyasının Adlandırıldı."
-    audiodownload_link_input_txt = "Lütfen indirmek istediğiniz Ses Bağlantısını Yapıştırın: "
-    audio_downloaded_msg = "Adlı ses dosyası indirilmiştir."
-    video_search_input_txt = "Aramak istediğiniz Videonun adını yazın: "
-    option_one = "1- Video indir"
-    option_two = "2- Müzik indir"
-    option_three = "3- Oynatma listesi indir"
-    option_four = "4- Video Arama"
-    option_five = "5- Çıkış"
-    choose_txt = "Lütfen Seçiminizi Yapın: "
-    exit_lang = "TR"
-else:
-     error_msg("Invalid language selection!","","")
+lang = config['AppLang']['lang']
+
+langconfig = configparser.ConfigParser()
+langconfig.read('Lang/{0}.ini'. format(lang))
+
+music_file_name = langconfig['LangContent']['music_file_name']
+playlist_file_name = langconfig['LangContent']['playlist_file_name']
+option_one = langconfig['LangContent']['option_one']
+option_two = langconfig['LangContent']['option_two']
+option_three = langconfig['LangContent']['option_three']
+option_four = langconfig['LangContent']['option_four']
+download_txt = langconfig['LangContent']['download_txt']
+search_txt = langconfig['LangContent']['search_txt']
+video_url_txt = langconfig['LangContent']['video_url_txt']
+music_url_txt = langconfig['LangContent']['music_url_txt']
+playlist_url_txt = langconfig['LangContent']['playlist_url_txt']
+video_search_txt = langconfig['LangContent']['video_search_txt']
+github_repo_txt = langconfig['LangContent']['github_repo_txt']
+my_github_acc_txt = langconfig['LangContent']['my_github_acc_txt']
+documents_txt = langconfig['LangContent']['documents_txt']
+about_txt = langconfig['LangContent']['about_txt']
+windows_not_os_txt = langconfig['LangContent']['windows_not_os_txt']
+open_txt = langconfig['LangContent']['open_txt']
+close_txt = langconfig['LangContent']['close_txt']
+downloaded_successfully = langconfig['LangContent']['downloaded_successfully']
