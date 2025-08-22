@@ -1,8 +1,6 @@
 # General Information About the Project
 This project was written using Python and various libraries. The project allows you to download videos and music from YouTube as videos, music or playlists. You can also search for videos on YouTube.
 
-
-
 ## Features of the Project
 * ✅ Video Download
 * ✅ Shorts Download
@@ -16,7 +14,7 @@ This project was written using Python and various libraries. The project allows 
 
 ### Installing the Library and Other Requirements
 
-###Linux
+#### Linux
 #### Ubuntu & Debian Installation of Required Programs and Tools
 ````
 sudo apt update
@@ -37,8 +35,9 @@ python app.py
 
 
 ## Libraries Used
-* [pytube](https://github.com/pytube/pytube)
-* [art](https://github.com/sepandhaghighi/art)
-* [youtube-search-python](https://github.com/alexmercerind/youtube-search-python)
+* [yt-dlp](https://github.com/yt-dlp/yt-dlp)
 * [os](https://github.com/python/cpython/blob/main/Lib/os.py)
-* [PyAppDevKit](https://github.com/LinuxUsersLinuxMint/PyAppDevKit)
+* [pyappdevkit](https://github.com/LinuxUsersLinuxMint/PyAppDevKit)
+* [customtkinter](https://github.com/TomSchimansky/CustomTkinter)
+* [pywinstyles](https://github.com/Akascape/py-window-styles)
+* [ctkmessagebox](https://github.com/Akascape/CTkMessagebox)
