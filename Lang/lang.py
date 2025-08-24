@@ -7,13 +7,13 @@ A Copy of This Software is published on GitHub To view: https://github.com/Linux
 
 import configparser
 
-config = configparser.ConfigParser()
-config.read('Lang/lang.ini')
+lang_config = configparser.ConfigParser()
+lang_config.read('Lang/lang.ini')
 
-lang = config['AppLang']['lang']
+lang = lang_config['AppLang']['lang']
 
 langconfig = configparser.ConfigParser()
-langconfig.read('Lang/{0}.ini'. format(lang))
+langconfig.read(f'Lang/{lang}.ini')
 
 music_file_name = langconfig['LangContent']['music_file_name']
 playlist_file_name = langconfig['LangContent']['playlist_file_name']

@@ -11,8 +11,7 @@ def close(event=None):
     window.destroy()
 
 def GetVideoUrl(event=None):
-    get_url = str(video_url_entry.get())
-    video_download(get_url)
+    video_download(str(video_url_entry.get()))
 
 def Video_downloader(event=None):
     global window, video_url_entry

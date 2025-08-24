@@ -11,8 +11,7 @@ def close(event=None):
     window.destroy()
 
 def GetPlaylistUrl(event=None):
-     get_url = str(playlist_url_entry.get())
-     playlist_download(get_url)
+     playlist_download(str(playlist_url_entry.get()))
 
 def Playlist_downloader(event=None):
     global window, playlist_url_entry

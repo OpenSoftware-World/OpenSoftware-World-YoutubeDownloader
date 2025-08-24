@@ -7,8 +7,13 @@ A Copy of This Software is published on GitHub To view: https://github.com/Linux
 
 import configparser
 
+theme_file_config = configparser.ConfigParser()
+theme_file_config.read('Theme/theme_file.ini')
+
+name = theme_file_config['ThemeDataFile']['name']
+
 theme_config = configparser.ConfigParser()
-theme_config.read('Theme/theme.ini')
+theme_config.read(f'Theme/{name}')
 
 userTheme = theme_config['ThemeSettings']['userTheme']
 pywinstyles_theme = theme_config['ThemeSettings']['pywinstyles_theme']

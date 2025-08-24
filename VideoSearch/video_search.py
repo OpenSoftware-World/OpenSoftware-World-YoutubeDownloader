@@ -11,8 +11,7 @@ def close(event=None):
     window.destroy()
 
 def GetSearchKeyword(event=None):
-    get_search = video_search_keyword_entry.get()
-    video_search(get_search)
+    video_search(video_search_keyword_entry.get())
 
 def Video_Search(event=None):
     global window, video_search_keyword_entry

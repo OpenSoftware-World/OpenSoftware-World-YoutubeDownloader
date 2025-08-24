@@ -11,8 +11,7 @@ def close(event=None):
     window.destroy()
 
 def GetAudioUrl(event=None):
-    get_url = str(audio_url_entry.get())
-    audio_download(get_url)
+    audio_download(str(audio_url_entry.get()))
 
 def Music_downloader(event=None):
     global window, audio_url_entry
