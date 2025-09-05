@@ -20,13 +20,16 @@ def tray():
     image = Image.open("Icon/lxlm_yt_downloader.png")
     tray_img = ImageDraw.Draw(image)
     tray_img.text((10, 25), "A", fill=(255,255,255))
+    
+    def window_m(mode):
+        if mode == "exit":
+            icon.stop()
+            window.quit()
+        elif mode == "show":
+            window.deiconify()
 
-    def on_exit(icon, item):
-        icon.stop()
-        window.quit()
-
-    def on_show(icon, item):
-        window.deiconify()
+    def open_url(url):
+        webbrowser.open(url)
     
     windows = pystray.Menu(
         pystray.MenuItem(option_one, Video_downloader),
@@ -36,17 +39,17 @@ def tray():
     )
 
     about = pystray.Menu(
-        pystray.MenuItem(github_repo_txt, lambda: webbrowser.open("https://github.com/LinuxUsersLinuxMint/LinuxUsersLinuxMint-YoutubeDownloader")),
-        pystray.MenuItem(my_github_acc_txt, lambda: webbrowser.open("https://github.com/LinuxUsersLinuxMint")),
-        pystray.MenuItem("Web Site", lambda: webbrowser.open("https://linuxuserslinuxmint.github.io/")),
-        pystray.MenuItem(documents_txt, lambda: webbrowser.open("https://linuxuserslinuxmint.github.io/Documents/documents"))
+        pystray.MenuItem(github_repo_txt, lambda: open_url("https://github.com/LinuxUsersLinuxMint/LinuxUsersLinuxMint-YoutubeDownloader")),
+        pystray.MenuItem(my_github_acc_txt, lambda: open_url("https://github.com/LinuxUsersLinuxMint")),
+        pystray.MenuItem("Web Site", lambda: open_url("https://linuxuserslinuxmint.github.io/")),
+        pystray.MenuItem(documents_txt, lambda: open_url("https://linuxuserslinuxmint.github.io/Documents/documents"))
     )
 
     menu = pystray.Menu(
         pystray.MenuItem(about_txt, about),
         pystray.MenuItem(windows_not_os_txt, windows),
-        pystray.MenuItem(open_txt, on_show),
-        pystray.MenuItem(close_txt, on_exit)
+        pystray.MenuItem(open_txt, lambda: window_m("show")),
+        pystray.MenuItem(close_txt, lambda: window_m("exit"))
     )
 
     icon = pystray.Icon("LinuxUsersLinuxMint-YTDownloader", image, "LinuxUsersLinuxMint-YTDownloader", menu)

@@ -26,7 +26,7 @@ def video_download(video_url):
 def playlist_download(playlist_url):
     options = {
         'format': 'best',
-        'outtmpl': '{0}/%(title)s.%(ext)s'. format(playlist_file_name),
+        'outtmpl': f'{playlist_file_name}/%(title)s.%(ext)s',
         'ignoreerrors': True,
     }
     with YoutubeDL(options) as yt_dlp:
@@ -36,7 +36,7 @@ def playlist_download(playlist_url):
 def audio_download(audio_url):
     options = {
         'format': 'bestaudio/best',
-        'outtmpl': '{0}/%(title)s.%(ext)s'. format(music_file_name),
+        'outtmpl': f'{music_file_name}/%(title)s.%(ext)s',
     }
     with YoutubeDL(options) as yt_dlp:
         yt_dlp.download([audio_url])
