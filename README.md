@@ -26,10 +26,10 @@ sudo apt install git
 
 #### Downloading and Running the Program
 ````
-git clone https://github.com/LinuxUsersLinuxMint/LinuxUsersLinuxMint-YoutubeDownloader.git
-cd LinuxUsersLinuxMint-YoutubeDownloader
+git clone https://github.com/OpenSoftware-World/OpenSoftware-World-YoutubeDownloader.git
+cd OpenSoftware-World-YoutubeDownloader
 pip install -r requirements.txt
-python app.py
+python ytdownloader.py
 ````
 
 
@@ -37,7 +37,7 @@ python app.py
 ## Libraries Used
 * [yt-dlp](https://github.com/yt-dlp/yt-dlp)
 * [os](https://github.com/python/cpython/blob/main/Lib/os.py)
-* [pyappdevkit](https://github.com/LinuxUsersLinuxMint/PyAppDevKit)
+* [pyappdevkit](https://github.com/OpenSoftware-World/PyAppDevKit)
 * [customtkinter](https://github.com/TomSchimansky/CustomTkinter)
 * [pywinstyles](https://github.com/Akascape/py-window-styles)
 * [ctkmessagebox](https://github.com/Akascape/CTkMessagebox)
