@@ -38,7 +38,7 @@ jobs:
         run: pyinstaller --onefile ytdownloader.py
 
       - name: Create package
-        run: zip -r osw_ytdownloader_stable_ver.zip dist/
+        run: zip -r osw_ytdownloader_stable_ver.zip dist/ Icon/ KeyboardShortcut/keyboard.ini Lang/en.ini Lang/lang.ini Lang/tr.ini ResetSettings/reset_settings.ini Theme/theme_file.ini Theme/theme.ini TrayMenu/tray.ini
 
       - name: Generate Changelog
         run: |
