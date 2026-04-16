@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -56,10 +58,13 @@ jobs:
           New-Item -ItemType Directory -Force -Path "$target\Theme"
           New-Item -ItemType Directory -Force -Path "$target\TrayMenu"
 
+          # main exe
           Copy-Item -Recurse -Force dist\ytdownloader\* $target\
 
+          # reset exe
           Copy-Item dist\reset_settings.exe $target\
 
+          # assets
           Copy-Item -Recurse -Force Icon $target\
           Copy-Item Lang\*.ini $target\Lang\
           Copy-Item KeyboardShortcut\*.ini $target\KeyboardShortcut\
@@ -69,12 +74,33 @@ jobs:
 
           Compress-Archive -Path $target -DestinationPath osw_ytdownloader_stable_ver.zip -Force
 
-      - name: Generate Changelog
+      - name: Generate Changelog (version.txt based)
         shell: pwsh
         run: |
-          "## 🚀 Release v${{ steps.version.outputs.version }}" | Out-File CHANGELOG.md
+          $version = "${{ steps.version.outputs.version }}"
+
+          # version.txt değişim commitlerini bul
+          $versionCommits = git log --pretty=format:"%H" -- version.txt
+
+          $hashes = $versionCommits.Split("`n")
+
+          if ($hashes.Count -lt 2) {
+            Write-Host "First release detected"
+            $commits = git log --pretty=format:"- %s"
+          }
+          else {
+            $current = $hashes[0]
+            $previous = $hashes[1]
+
+            Write-Host "Current: $current"
+            Write-Host "Previous: $previous"
+
+            $commits = git log $previous..$current --pretty=format:"- %s"
+          }
+
+          "## 🚀 Release v$version" | Out-File CHANGELOG.md
           "" | Out-File CHANGELOG.md -Append
-          git log -1 --pretty=format:"- %s" | Out-File CHANGELOG.md -Append
+          $commits | Out-File CHANGELOG.md -Append
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
