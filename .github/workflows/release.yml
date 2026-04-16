@@ -37,7 +37,9 @@ jobs:
           echo "version=$v" >> $env:GITHUB_OUTPUT
 
       - name: Build EXE
-        run: pyinstaller --noconsole ytdownloader.py
+        run: |
+          pyinstaller --onefile ResetSettings\reset_settings.py
+          pyinstaller --noconsole ytdownloader.py
 
       - name: Create package
         shell: pwsh
