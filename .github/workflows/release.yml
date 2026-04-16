@@ -50,7 +50,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: yt${{ steps.version.outputs.version }}
-          name: yt${{ steps.version.outputs.version }}
+          name: OpenSoftware-World YoutubeDownloader ${{ steps.version.outputs.version }}
           body_path: CHANGELOG.md
           files: |
             osw_ytdownloader_stable_ver.zip
