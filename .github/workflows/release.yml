@@ -9,7 +9,7 @@ on:
 
 jobs:
   release:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     permissions:
       contents: write
@@ -31,32 +31,43 @@ jobs:
 
       - name: Read version
         id: version
+        shell: pwsh
         run: |
-          echo "version=$(cat version.txt)" >> $GITHUB_OUTPUT
+          $v = Get-Content version.txt
+          echo "version=$v" >> $env:GITHUB_OUTPUT
 
       - name: Build EXE
-        run: pyinstaller ytdownloader.py
+        run: pyinstaller --noconsole --onefile ytdownloader.py
 
       - name: Create package
+        shell: pwsh
         run: |
-          mkdir -p package/ytdownloader
+          $target = "package\ytdownloader"
 
-          cp -r dist/* package/ytdownloader/
-          cp -r Icon package/ytdownloader/
-          cp -r KeyboardShortcut package/ytdownloader/
-          cp -r Lang package/ytdownloader/
-          cp -r ResetSettings package/ytdownloader/
-          cp -r Theme package/ytdownloader/
-          cp -r TrayMenu package/ytdownloader/
+          New-Item -ItemType Directory -Force -Path $target
+          New-Item -ItemType Directory -Force -Path "$target\Lang"
+          New-Item -ItemType Directory -Force -Path "$target\KeyboardShortcut"
+          New-Item -ItemType Directory -Force -Path "$target\ResetSettings"
+          New-Item -ItemType Directory -Force -Path "$target\Theme"
+          New-Item -ItemType Directory -Force -Path "$target\TrayMenu"
 
-          cd package
-          zip -r ../osw_ytdownloader_stable_ver.zip ytdownloader
+          Copy-Item -Recurse -Force dist\ytdownloader\* $target\
+
+          Copy-Item -Recurse -Force Icon $target\
+          Copy-Item Lang\*.ini $target\Lang\
+          Copy-Item KeyboardShortcut\*.ini $target\KeyboardShortcut\
+          Copy-Item ResetSettings\*.ini $target\ResetSettings\
+          Copy-Item Theme\*.ini $target\Theme\
+          Copy-Item TrayMenu\*.ini $target\TrayMenu\
+
+          Compress-Archive -Path $target -DestinationPath osw_ytdownloader_stable_ver.zip -Force
 
       - name: Generate Changelog
+        shell: pwsh
         run: |
-          echo "## 🚀 Release v${{ steps.version.outputs.version }}" > CHANGELOG.md
-          echo "" >> CHANGELOG.md
-          git log -1 --pretty=format:"- %s" >> CHANGELOG.md
+          "## 🚀 Release v${{ steps.version.outputs.version }}" | Out-File CHANGELOG.md
+          "" | Out-File CHANGELOG.md -Append
+          git log -1 --pretty=format:"- %s" | Out-File CHANGELOG.md -Append
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
