@@ -2,12 +2,17 @@ name: Build & Release
 
 on:
   push:
-    tags:
-      - "yt*"
+    branches:
+      - main
+    paths:
+      - "version.txt"
 
 jobs:
   release:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout
@@ -24,13 +29,29 @@ jobs:
       - name: Install PyInstaller
         run: pip install pyinstaller
 
+      - name: Read version
+        id: version
+        run: |
+          echo "version=$(cat version.txt)" >> $GITHUB_OUTPUT
+
       - name: Build EXE
         run: pyinstaller --onefile ytdownloader.py
 
       - name: Create package
-        run: zip -r ytdownloader.zip dist/
+        run: zip -r ytdownloader.zip dist/ version.txt
 
-      - name: Upload Release
+      - name: Generate Changelog
+        run: |
+          echo "## 🚀 Release v${{ steps.version.outputs.version }}" > CHANGELOG.md
+          echo "" >> CHANGELOG.md
+          git log -1 --pretty=format:"- %s" >> CHANGELOG.md
+
+      - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: ytdownloader.zip
+          tag_name: v${{ steps.version.outputs.version }}
+          name: v${{ steps.version.outputs.version }}
+          body_path: CHANGELOG.md
+          files: |
+            ytdownloader.zip
+            version.txt
