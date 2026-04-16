@@ -49,8 +49,8 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v${{ steps.version.outputs.version }}
-          name: v${{ steps.version.outputs.version }}
+          tag_name: yt${{ steps.version.outputs.version }}
+          name: yt${{ steps.version.outputs.version }}
           body_path: CHANGELOG.md
           files: |
             ytdownloader.zip
