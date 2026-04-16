@@ -36,10 +36,13 @@ jobs:
           $v = Get-Content version.txt
           echo "version=$v" >> $env:GITHUB_OUTPUT
 
-      - name: Build EXE
+      - name: Build EXE (main app)
         run: |
-          pyinstaller --onefile ResetSettings\reset_settings.py
           pyinstaller --noconsole ytdownloader.py
+
+      - name: Build EXE (reset tool)
+        run: |
+          pyinstaller --onefile --name reset_settings ResetSettings\reset_settings.py
 
       - name: Create package
         shell: pwsh
@@ -54,6 +57,8 @@ jobs:
           New-Item -ItemType Directory -Force -Path "$target\TrayMenu"
 
           Copy-Item -Recurse -Force dist\ytdownloader\* $target\
+
+          Copy-Item dist\reset_settings.exe $target\
 
           Copy-Item -Recurse -Force Icon $target\
           Copy-Item Lang\*.ini $target\Lang\
