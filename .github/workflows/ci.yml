@@ -20,5 +20,11 @@ jobs:
       - name: Install requirements.txt
         run: pip install -r requirements.txt
 
-      - name: Test
+      - name: Install Ruff
+        run: pip install ruff==0.6.0
+
+      - name: Lint check
+        run: ruff check .
+
+      - name: Import Test
         run: python -c "import ytdownloader"
