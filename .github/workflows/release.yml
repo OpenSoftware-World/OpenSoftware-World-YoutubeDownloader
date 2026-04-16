@@ -35,13 +35,13 @@ jobs:
           echo "version=$(cat version.txt)" >> $GITHUB_OUTPUT
 
       - name: Build EXE
-        run: pyinstaller --onefile ytdownloader.py
+        run: pyinstaller ytdownloader.py
 
       - name: Create package
         run: |
           mkdir -p package/ytdownloader
 
-          cp -r dist package/ytdownloader/
+          cp -r dist/* package/ytdownloader/
           cp -r Icon package/ytdownloader/
           cp -r KeyboardShortcut package/ytdownloader/
           cp -r Lang package/ytdownloader/
