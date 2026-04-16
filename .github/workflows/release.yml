@@ -38,7 +38,7 @@ jobs:
         run: pyinstaller --onefile ytdownloader.py
 
       - name: Create package
-        run: zip -r ytdownloader.zip dist/ version.txt
+        run: zip -r osw_ytdownloader_stable_ver.zip dist/
 
       - name: Generate Changelog
         run: |
@@ -53,5 +53,4 @@ jobs:
           name: yt${{ steps.version.outputs.version }}
           body_path: CHANGELOG.md
           files: |
-            ytdownloader.zip
-            version.txt
+            osw_ytdownloader_stable_ver.zip
