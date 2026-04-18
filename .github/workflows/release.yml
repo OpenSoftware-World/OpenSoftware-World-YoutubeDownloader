@@ -40,7 +40,7 @@ jobs:
 
       - name: Build EXE (main app)
         run: |
-          pyinstaller --noconsole ytdownloader.py
+          pyinstaller --noconsole --icon=Icon\lxlm_yt_downloader.ico --version-file=info.txt ytdownloader.py
 
       - name: Build EXE (reset tool)
         run: |
