@@ -1,4 +1,4 @@
-yt-dlp==2026.3.17
+yt-dlp==2026.6.9
 CTkMessagebox==2.7
 pywinstyles==1.8
 customtkinter==5.2.2
